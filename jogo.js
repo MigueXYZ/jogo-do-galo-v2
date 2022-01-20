@@ -16,6 +16,7 @@ const combo=[
 ];
 
 
+
 function test(){
     do {
     const input = prompt("Escolhe uma posição");
@@ -75,10 +76,11 @@ function restartGame(){
 
 function checkIfWin(){
 
-
     else if(playsNumber===9){
         $("#myModal .modal-body").html="<p> Jogo Empatou </p>";
         $("#myModal .modal-footer").html=('<a href="#" class="btn btn-primary" onclick="restartGame()">');
         $("#myModal").modal('show');
     }
 }
+
+
