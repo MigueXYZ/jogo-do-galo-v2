@@ -1,3 +1,15 @@
 let player;
 let mode;
-let 
+let table=[
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+];
+
+console.log();
