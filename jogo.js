@@ -25,7 +25,7 @@ tablee.lenght = 9;
 function test(){
     do {
     const input = prompt("Escolhe uma posição");
-    console-clear();
+    console.clear();
     play(input);
     playsNumber+=1;
     // loop the outer array
@@ -39,7 +39,7 @@ function test(){
         }
         console.log("\n");
     }
-    }while ($input!=-1);
+    }while (input!=-1);
 }
 
 
