@@ -1,11 +1,26 @@
 body{
-    background-color: white;
-    color:dodgerblue;
+    background-color: gainsboro;
+    color:darkslateblue;
 
 }
 h1{
     text-align: center;
 }
-h4{
+h3{
     text-align: center;
+}
+td {
+    width: 200px;
+    height: 200px;
+}
+table {
+    margin: 10px auto;
+}
+.vert {
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+}
+.hori {
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
 }
