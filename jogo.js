@@ -7,6 +7,22 @@ let table=[
     [" "," "," "]
 ];
 
+const combo=[
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,4,8],
+    [2,4,6],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+];
+
+const tablee = [1];
+tablee.lenght = 9;
+
+console.log(tablee);
+
 function test(){
     do {
     const input = prompt("Escolhe uma posição");
@@ -29,7 +45,7 @@ function test(){
 
 
 function play(pos){
-    if(table[pos-1]==" "){
+    if(table[pos-1]===" "){
         table[pos-1]=player;
         changePlayer();
     }
@@ -40,7 +56,7 @@ function play(pos){
 }
 
 function changePlayer(){
-    if(player==1){
+    if(player===1){
         player=0;
     }
     else{
@@ -53,5 +69,13 @@ function whosPlaying(){
 }
 
 function checkIfWin(){
+    if(table[0] && table[1] && table[2] === '1' || '0'){
 
+    }
+}
+function checkIfTie(){
+    if(playsNumber===9){
+        checkIfWin();
+    }
+else{}
 }
