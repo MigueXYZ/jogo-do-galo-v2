@@ -6,9 +6,8 @@ body{
 h1{
     text-align: center;
 }
-h3{
-    text-align: center;
-}
+
+
 td {
     width: 200px;
     height: 200px;
@@ -24,3 +23,8 @@ table {
     border-top: 3px solid black;
     border-bottom: 3px solid black;
 }
+.rules{
+    color: darkred;
+    text-align: center;
+}
+
