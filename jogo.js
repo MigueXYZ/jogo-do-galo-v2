@@ -69,13 +69,10 @@ function whosPlaying(){
 }
 
 function checkIfWin(){
-    if(table[0] && table[1] && table[2] === '1' || '0'){
 
+    else if(playsNumber===9){
+        //;
     }
 }
-function checkIfTie(){
-    if(playsNumber===9){
-        checkIfWin();
-    }
-else{}
-}
+
+
