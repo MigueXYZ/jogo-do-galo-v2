@@ -21,7 +21,6 @@ const combo=[
 const tablee = [1];
 tablee.lenght = 9;
 
-console.log(tablee);
 
 function test(){
     do {
