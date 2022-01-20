@@ -1,12 +1,8 @@
-let player=0;
+//create player
 let mode;
 let level=1;
 let playsNumber=0;
-let table=[
-    [" "," "," "],
-    [" "," "," "],
-    [" "," "," "]
-];
+const table=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
 
 const combo=[
     [0,1,2],
@@ -37,14 +33,16 @@ function test(){
         }
         console.log("\n");
     }
-    }while ($input!=-1);
+    }while (input!=-1);
 }
 
 
-function play(pos){
-    if(table[pos-1]===" "){
+function play(pos,player){
+    if(table[pos-1]===-1){
         table[pos-1]=player;
-        changePlayer();
+
+        player=!player;
+        whosPlaying(player);
     }
     else{
         alert("Casa indisponivel!");
@@ -61,13 +59,13 @@ function changePlayer(){
     }
 }
 
-function whosPlaying(){
+function whosPlaying(player){
     document.getElementById("player").innerHTML="Player " + (player+1);
 }
 
 function restartGame(){
     playsNumber=0;
-    table=[[" "," "," "],[" "," "," "],[" "," "," "]];
+    table=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
     changePlayer();
     for(i=0;i<9;i++){
         document.getElementById("pos_${i}").src="transparent.png";
