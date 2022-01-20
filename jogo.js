@@ -1,5 +1,6 @@
 let player=0;
 let mode;
+let level=1;
 let playsNumber=0;
 let table=[
     [" "," "," "],
@@ -18,15 +19,10 @@ const combo=[
     [2,5,8],
 ];
 
-const tablee = [1];
-tablee.lenght = 9;
-
-console.log(tablee);
-
 function test(){
     do {
     const input = prompt("Escolhe uma posição");
-    console-clear();
+    console.clear();
     play(input);
     playsNumber+=1;
     // loop the outer array
@@ -68,14 +64,29 @@ function whosPlaying(){
     document.getElementById("player").innerHTML="Player " + (player+1);
 }
 
+function restartGame(){
+    playsNumber=0;
+    table=[[" "," "," "],[" "," "," "],[" "," "," "]];
+    changePlayer();
+    for(i=0;i<9;i++){
+        document.getElementById("pos_${i}").src="transparent.png";
+    }
+}
+
+
 function checkIfWin(){
     if(table[0] && table[1] && table[2] === '1' || '0'){
 
     }
+    else if(playsNumber===9){
+        $("#myModal .modal-body").html="<p> Jogo Empatou </p>";
+        $("#myModal .modal-footer").html=('<a href="#" class="btn btn-primary" onclick="restartGame()">');
+        $("#myModal").modal('show');
+    }
 }
+
 function checkIfTie(){
     if(playsNumber===9){
         checkIfWin();
     }
-else{}
 }
