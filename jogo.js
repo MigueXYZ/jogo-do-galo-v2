@@ -77,5 +77,5 @@ function checkIfTie(){
     if(playsNumber===9){
         checkIfWin();
     }
-
+else{}
 }
