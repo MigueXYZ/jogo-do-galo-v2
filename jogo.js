@@ -39,7 +39,7 @@ function test(){
 */
 
 
-function play(pos,player){
+function play(pos){
 
     if(table[pos-1]===-1){
         table[pos-1]=player;
