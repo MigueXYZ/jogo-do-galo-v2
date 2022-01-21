@@ -37,15 +37,12 @@ function test(){
     }while (input!=-1);
 }
 */
-function startGame(){
 
-}
-
-
-function play(pos,player){
+function play(pos){
+    whosPlaying();
     if(table[pos-1]===-1){
         table[pos-1]=player;
-
+alert("broas mano");
         changePlayer(player);
 
     }
@@ -57,9 +54,10 @@ function play(pos,player){
 
 function changePlayer(player){
     player=!player;
+    $("#player").html(player);
 }
 
-function whosPlaying(player){
+function whosPlaying(){
     return($("#player").value);
 }
 
