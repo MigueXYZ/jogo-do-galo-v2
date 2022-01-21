@@ -1,11 +1,8 @@
 let player=0;
 let mode;
+let level=1;
 let playsNumber=0;
-let table=[
-    [" "," "," "],
-    [" "," "," "],
-    [" "," "," "]
-];
+const table=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
 
 const combo=[
     [0,1,2],
@@ -18,14 +15,12 @@ const combo=[
     [2,5,8],
 ];
 
-const tablee = [1];
-tablee.lenght = 9;
 
-
+/*
 function test(){
     do {
     const input = prompt("Escolhe uma posição");
-    console-clear();
+    console.clear();
     play(input);
     playsNumber+=1;
     // loop the outer array
@@ -39,38 +34,52 @@ function test(){
         }
         console.log("\n");
     }
-    }while ($input!=-1);
+    }while (input!=-1);
 }
-
+*/
 
 function play(pos){
-    if(table[pos-1]===" "){
+    window.alert("broas mano");
+    whosPlaying();
+
+    if(table[pos-1]===-1){
         table[pos-1]=player;
-        changePlayer();
+window.alert("broas mano");
+        changePlayer(player);
+
     }
     else{
-        alert("Casa indisponivel!");
+        window.alert("Casa indisponivel!");
     }
 
 }
 
-function changePlayer(){
-    if(player===1){
-        player=0;
-    }
-    else{
-        player=1;
-    }
+function changePlayer(player){
+    player=!player;
+    $("#player").html(player);
 }
 
 function whosPlaying(){
-    document.getElementById("player").innerHTML="Player " + (player+1);
+    window.alert("broas mano");
+    return($("#player").value);
 }
+
+function restartGame(){
+    playsNumber=0;
+    table=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
+    changePlayer();
+    for(i=0;i<9;i++){
+        document.getElementById("pos_"+(i+1)).src="imagens/xo/transparent.png";
+    }
+}
+
 
 function checkIfWin(){
 
     else if(playsNumber===9){
-        //;
+        $("#myModal .modal-body").html="<p> Jogo Empatou </p>";
+        $("#myModal .modal-footer").html=('<a href="#" class="btn btn-primary" onclick="restartGame()">');
+        $("#myModal").modal('show');
     }
 }
 
