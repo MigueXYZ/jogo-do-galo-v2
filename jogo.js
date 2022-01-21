@@ -2,7 +2,7 @@ let player=0;
 let mode;
 let level=1;
 let playsNumber=0;
-const table=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
+var table=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
 
 const combo=[
     [0,1,2],
