@@ -2,7 +2,7 @@ let player=0;
 let mode;
 let level=1;
 let playsNumber=0;
-let table=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
+const table=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
 
 const combo=[
     [0,1,2],
@@ -37,9 +37,6 @@ function test(){
     }while (input!=-1);
 }
 */
-function startGame(){
-
-}
 
 
 function play(pos,player){
@@ -51,16 +48,18 @@ function play(pos,player){
 
     }
     else{
-        alert("Casa indisponivel!");
+        window.alert("Casa indisponivel!");
     }
 
 }
 
 function changePlayer(player){
     player=!player;
+    $("#player").html(player);
 }
 
-function whosPlaying(player){
+function whosPlaying(){
+    window.alert("broas mano");
     return($("#player").value);
 }
 
@@ -69,7 +68,7 @@ function restartGame(){
     table=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
     changePlayer();
     for(i=0;i<9;i++){
-        document.getElementById("pos_${i}").src="imagens/xo/transparent.png";
+        document.getElementById("pos_"+(i+1)).src="imagens/xo/transparent.png";
     }
 }
 
