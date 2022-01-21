@@ -1,5 +1,5 @@
 body{
-    background-color: gainsboro;
+    background-color: white;
     color:darkslateblue;
 
 }
@@ -29,8 +29,39 @@ table {
 }
 
 img{
+    margin-left: 25px;
+    margin-top: 5px;
     width:200px;
     height:200px;
     z-index: -1;
+}
+
+#container {
+    display: flex;
+    width: 800px;
+    margin: 50px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+.box {
+    height: 230px;
+    border: 6px solid black;
+    box-sizing: border-box;
+    flex: 1 1 33%;
+}
+#block-1, #block-2, #block-3 {
+    border-top: none;
+}
+#block-1, #block-4, #block-7 {
+    border-left: none;
+}
+#block-7, #block-8, #block-9 {
+    border-bottom: none;
+}
+#block-3, #block-6, #block-9 {
+    border-right: none;
 }
 
