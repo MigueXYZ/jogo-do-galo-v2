@@ -2,7 +2,7 @@ let player=0;
 let mode;
 let level=1;
 let playsNumber=0;
-const table=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
+var table=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
 
 const combo=[
     [0,1,2],
@@ -38,13 +38,12 @@ function test(){
 }
 */
 
+
 function play(pos){
-    window.alert("broas mano");
-    whosPlaying();
 
     if(table[pos-1]===-1){
         table[pos-1]=player;
-window.alert("broas mano");
+        document.getElementById(pos).src="imagens/xo/x.jpg";
         changePlayer(player);
 
     }
@@ -75,12 +74,27 @@ function restartGame(){
 
 
 function checkIfWin(){
+    let tempTable = [-1,-1,-1]
+    for(var i = 0; i < 9; i++){
+        if(table[i]=== 1){
+            for(var j = 0; j < 3; j++){
+                    tempTable[j]=i;
+            }
+        }
+    }
 
+
+
+
+    /*
+    if(i){
+
+    }
     else if(playsNumber===9){
         $("#myModal .modal-body").html="<p> Jogo Empatou </p>";
         $("#myModal .modal-footer").html=('<a href="#" class="btn btn-primary" onclick="restartGame()">');
         $("#myModal").modal('show');
-    }
+    }*/
 }
 
 
