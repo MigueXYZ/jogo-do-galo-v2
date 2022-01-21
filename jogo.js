@@ -37,13 +37,17 @@ function test(){
     }while (input!=-1);
 }
 */
+function startGame(){
+
+}
+
 
 function play(pos,player){
     if(table[pos-1]===-1){
         table[pos-1]=player;
 
-        player=!player;
-        whosPlaying(player);
+        changePlayer(player);
+
     }
     else{
         alert("Casa indisponivel!");
@@ -51,17 +55,12 @@ function play(pos,player){
 
 }
 
-function changePlayer(){
-    if(player===1){
-        player=0;
-    }
-    else{
-        player=1;
-    }
+function changePlayer(player){
+    player=!player;
 }
 
 function whosPlaying(player){
-    document.getElementById("player").innerHTML="Player " + (player+1);
+    return($("#player").value);
 }
 
 function restartGame(){
@@ -69,7 +68,7 @@ function restartGame(){
     table=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
     changePlayer();
     for(i=0;i<9;i++){
-        document.getElementById("pos_${i}").src="transparent.png";
+        document.getElementById("pos_${i}").src="imagens/xo/transparent.png";
     }
 }
 
