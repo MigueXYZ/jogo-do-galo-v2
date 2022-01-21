@@ -1,4 +1,4 @@
-//create player
+let player=0;
 let mode;
 let level=1;
 let playsNumber=0;
@@ -16,7 +16,7 @@ const combo=[
 ];
 
 
-
+/*
 function test(){
     do {
     const input = prompt("Escolhe uma posição");
@@ -36,7 +36,7 @@ function test(){
     }
     }while (input!=-1);
 }
-
+*/
 
 function play(pos,player){
     if(table[pos-1]===-1){
