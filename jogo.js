@@ -2,7 +2,7 @@ let player=0;
 let mode;
 let level=1;
 let playsNumber=0;
-const table=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
+var table=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
 
 const combo=[
     [0,1,2],
@@ -14,6 +14,35 @@ const combo=[
     [1,4,7],
     [2,5,8],
 ];
+
+function create{
+    document.cookie="player=0;table=[-1,-1,-1,-1,-1,-1,-1,-1,-1];score=[0,0];expires=Thu, 18 Dec 2050 12:00:00 UTC;path=/;";
+    document.cookie="score=[0,0];expires=Thu, 18 Dec 2013 12:00:00 UTC;path=/;";
+    document.cookie="table=[-1,-1,-1,-1,-1,-1,-1,-1,-1];score=[0,0];expires=Thu, 18 Dec 2013 12:00:00 UTC;path=/;";
+}
+
+function setCookie(cname,cvalue) {
+    const d = new Date();
+    d.setTime(d.getTime() + (30*24*60*60*1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
 
 
 /*
@@ -38,30 +67,28 @@ function test(){
 }
 */
 
-function play(pos){
-    window.alert("broas mano");
-    whosPlaying();
-
+function regPlay(pos){
+    player=getCookie("player");
+    table=getCookie("table");
     if(table[pos-1]===-1){
         table[pos-1]=player;
-window.alert("broas mano");
+        document.getElementById(pos).src="imagens/xo/milho.png";
         changePlayer(player);
+        setCookie("table",table);
+        $("#player").html(player);
 
     }
     else{
-        window.alert("Casa indisponivel!");
+alert("---___---");
+        $("#myModal .modal-body").html="<span> Casa Indisponivel </span>";
+        $("#myModal .modal-footer").html=("<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>");
+        $("#myModal").modal('show');
     }
-
 }
 
 function changePlayer(player){
     player=!player;
-    $("#player").html(player);
-}
-
-function whosPlaying(){
-    window.alert("broas mano");
-    return($("#player").value);
+    setCookie("player",player);
 }
 
 function restartGame(){
@@ -75,12 +102,27 @@ function restartGame(){
 
 
 function checkIfWin(){
+    let tempTable = [-1,-1,-1]
+    for(var i = 0; i < 9; i++){
+        if(table[i]=== 1){
+            for(var j = 0; j < 3; j++){
+                    tempTable[j]=i;
+            }
+        }
+    }
 
+
+
+
+    /*
+    if(i){
+
+    }
     else if(playsNumber===9){
         $("#myModal .modal-body").html="<p> Jogo Empatou </p>";
         $("#myModal .modal-footer").html=('<a href="#" class="btn btn-primary" onclick="restartGame()">');
         $("#myModal").modal('show');
-    }
+    }*/
 }
 
 
