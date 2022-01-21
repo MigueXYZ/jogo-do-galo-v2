@@ -1,14 +1,18 @@
 body{
-    background-color: white;
+    background-color: #63c078;
     color:darkslateblue;
 
 }
 h1{
     text-align: center;
+
+}
+h5{
+    text-align: center;
 }
 
-
-td {
+/*-------------------------------------------------------
+\\ td {
     width: 200px;
     height: 200px;
 }
@@ -23,16 +27,22 @@ table {
     border-top: 3px solid black;
     border-bottom: 3px solid black;
 }
+--------------------------------------------------------*/
+
 .rules{
-    color: darkred;
+
     text-align: center;
+
 }
+
+
+
 
 img{
     margin-left: 25px;
     margin-top: 5px;
-    width:200px;
-    height:200px;
+    width:609px;
+    height:139px;
     z-index: -1;
 }
 
@@ -47,6 +57,7 @@ img{
     margin-right: auto;
 }
 .box {
+    background-color: white;
     height: 230px;
     border: 6px solid black;
     box-sizing: border-box;
@@ -64,4 +75,10 @@ img{
 #block-3, #block-6, #block-9 {
     border-right: none;
 }
+
+
+
+
+
+
 
