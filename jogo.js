@@ -37,29 +37,30 @@ function test(){
     }while (input!=-1);
 }
 */
-function startGame(){
 
-}
+function play(pos){
+    window.alert("broas mano");
+    whosPlaying();
 
-
-function play(pos,player){
     if(table[pos-1]===-1){
         table[pos-1]=player;
-
+window.alert("broas mano");
         changePlayer(player);
 
     }
     else{
-        alert("Casa indisponivel!");
+        window.alert("Casa indisponivel!");
     }
 
 }
 
 function changePlayer(player){
     player=!player;
+    $("#player").html(player);
 }
 
-function whosPlaying(player){
+function whosPlaying(){
+    window.alert("broas mano");
     return($("#player").value);
 }
 
@@ -68,7 +69,7 @@ function restartGame(){
     table=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
     changePlayer();
     for(i=0;i<9;i++){
-        document.getElementById("pos_${i}").src="imagens/xo/transparent.png";
+        document.getElementById("pos_"+(i+1)).src="imagens/xo/transparent.png";
     }
 }
 
