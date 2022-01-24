@@ -1,5 +1,5 @@
 body{
-    background-color: #63c078;
+    background-color: #63c078 !important;
     color:darkslateblue;
 
 }
@@ -38,18 +38,25 @@ table {
 
 
 
-img{
+img#logo{
     margin-left: 25px;
     margin-top: 5px;
     width:609px;
     height:139px;
     z-index: -1;
 }
+img{
+    margin-left: 25px;
+    margin-top: 5px;
+    width:200px;
+    height:200px;
+    z-index: -1;
+}
 
 #container {
     display: flex;
     width: 800px;
-    margin: 50px;
+
     flex-direction: row;
     flex-wrap: wrap;
     position: relative;
@@ -58,6 +65,7 @@ img{
 }
 .box {
     height: 230px;
+
     border: 6px solid black;
     box-sizing: border-box;
     flex: 1 1 33%;
