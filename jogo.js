@@ -17,7 +17,9 @@ function fazTudo(){
 
 function inicia(obj){
     objG=obj;
-
+}
+function restartGame(obj){
+    objG.tabuleiro=obj.tabuleiro;
 
 }
 
@@ -25,8 +27,18 @@ function regPlay(pos){
     if(objG.tabuleiro[pos-1]==-1){
         objG.tabuleiro[pos-1]=parseInt(0+objG.player);
         objG.desenha();
-        if(objG.verifica()){
-            alert();
+        aux=objG.verifica();
+        if(aux==-1{
+            $("#myModal .modal-body").html="<span> Empate </span>";
+            $("#myModal .modal-footer").html=("<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>");
+            $("#myModal").modal('show');
+        })
+        if(aux!=-1){
+            $("#myModal .modal-body").html="<span> Vitória do jogador " + (aux+1) + "</span>";
+            $("#myModal .modal-footer").html=("<button onclick='restartGame(game)' type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Fechar</button>");
+            $("#myModal").modal({
+                show:'true'
+            });
         };
         objG.player=!objG.player;
     }
@@ -37,19 +49,8 @@ function regPlay(pos){
     }
 }
 
-function changePlayer(player){
-    player=!player;
-    setCookie("player",player);
-}
 
-function restartGame(){
-    playsNumber=0;
-    table=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
-    changePlayer();
-    for(i=0;i<9;i++){
-        document.getElementById("pos_"+(i+1)).src="imagens/xo/transparent.png";
-    }
-}
+
 
 
 function checkIfWin(){
