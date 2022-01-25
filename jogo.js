@@ -36,12 +36,15 @@ function regPlay(pos){
             $('#myModal').modal('show');
             restartGame(game);
         }
-        if(aux!==0){
+        else if(aux!==0){
             $('#titulo').html('Vitória');
-            $('#corpo').html('Parabéns jogador '+(aux+1));
+            $('#corpo').html('Parabéns jogador '+(!aux+1));
             $('#myModal').modal('show');
-        };
+        }
         objG.player=!objG.player;
+        $('#playjogador').html('Jogador '+ parseInt(1+!objG.player));
+
+
     }
     else{
         $("#myModal .modal-body").html="<span> Casa Indisponivel </span>";
