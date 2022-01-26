@@ -23,14 +23,14 @@ function inicia(obj,computador=0){
 
 function restartGame(){
     objG.tabuleiro=JSON.parse(JSON.stringify(backup.tabuleiro));
-    objG.player=!objG.player;
+    //objG.player=!objG.player;
     objG.desenha();
 }
 
 async function checkModal(ativo){
     if (!$('#myModal').is(':visible')) {
         ativo=false;
-        restartGame(backup);
+        //restartGame(backup);
     }
     if(ativo===true){
         setInterval(checkModal(ativo),100);
@@ -63,6 +63,7 @@ function regPlay(pos){
             checkModal(true);
 
             $('#titulo').html('Empate');
+            $('#corpo').html('O jogo acabou em Empate')
             $('#myModal').modal('show');
         }
         else if(aux!==0){
@@ -77,14 +78,15 @@ function regPlay(pos){
         $('#playjogador').html('Jogador '+ parseInt(1+!objG.player));
     }
     else{
-        $('#titulo').html("Erro!")
-        $('#corpo').html("<span> Casa Indisponivel </span>");
-        $('#myModal').modal('show');
+        $('#titulo2').html("Erro!")
+        $('#corpo2').html("<span> Casa Indisponivel </span>");
+        $('#myModal2').modal('show');
     }
 }
 
 function desativa(){
     $('#myModal').modal('hide');
+    $('#myModal2').modal('hide');
 }
 
 
