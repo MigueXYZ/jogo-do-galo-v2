@@ -17,22 +17,23 @@ function fazTudo(){
 
 function inicia(obj,computador){
     objG=obj;
-    backup=JSON.parse(JSON.stringify(objG.tabuleiro));
+    console.log("chamaram-me");
+    //backup=JSON.parse(JSON.stringify(objG.tabuleiro));
+    backup=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
     if(computador===true){
        objG.nivel=1;
     }
 }
 
 function restartGame(){
-    objG.tabuleiro=backup;
-    objG.player=!objG.player;
+    objG.tabuleiro=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
     objG.desenha();
 }
 
 async function checkModal(ativo){
     if (!$('#myModal').is(':visible')) {
         ativo=false;
-        //restartGame(backup);
+        restartGame();
     }
     if(ativo===true){
         setInterval(checkModal(ativo),100);
@@ -47,6 +48,7 @@ function regPlay(pos){
         aux=objG.verifica();
         console.log("aux: "+aux);
         console.log("tabuleiro: "+objG.tabuleiro);
+        console.log("player: "+parseInt(1+objG.player));
         if(aux==-1){
             checkModal(true);
 
@@ -64,16 +66,16 @@ function regPlay(pos){
                     }
         objG.player=!objG.player;
         $('#playjogador').html('Jogador '+ parseInt(1+!objG.player));
+
+
+
     }
     else{
         $('#titulo2').html("Erro!")
         $('#corpo2').html("<span> Casa Indisponivel </span>");
         $('#myModal2').modal('show');
     }
-    if(objG.player==false && objG.nivel!=0){
-        aux=JSON.parse(JSON.stringify(objG.tabuleiro));
-        console.log(minimax(aux,parseInt(0+objG.player)));
-    }
+
 }
 
 function desativa(){
@@ -103,25 +105,29 @@ function checkIfWinner(board , player)
 function minimax(newBoard, player) {
 
     var availSpots = emptyIndexies(newBoard);
-
-    if (checkIfWinner(newBoard, 0)) {
+    console.log("no inicio");
+    if (checkIfWinner(newBoard, false)) {
         return {score: -10};
-    } else if (checkIfWinner(newBoard, 1)) {
+    } else if (checkIfWinner(newBoard, true)) {
         return {score: 10};
     } else if (availSpots.length === 0) {
         return {score: 0};
     }
+
     var moves = [];
+
     for (var i = 0; i < availSpots.length; i++) {
+
+
         var move = {};
         move.index = newBoard[availSpots[i]];
         newBoard[availSpots[i]] = player;
 
-        if (player == 1) {
-            var result = minimax(newBoard, 0);
+        if (player == true) {
+            var result = minimax(newBoard, false);
             move.score = result.score;
         } else {
-            var result = minimax(newBoard, 1);
+            var result = minimax(newBoard, true);
             move.score = result.score;
         }
 
@@ -131,7 +137,7 @@ function minimax(newBoard, player) {
     }
 
     var bestMove;
-    if(player === Computer) {
+    if(player === 'true') {
         var bestScore = -10000;
         for(var i = 0; i < moves.length; i++) {
             if (moves[i].score > bestScore) {
@@ -149,5 +155,7 @@ function minimax(newBoard, player) {
         }
     }
 
+    console.log(moves[bestMove]);
     return moves[bestMove];
+
 }
