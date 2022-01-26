@@ -32,7 +32,7 @@ function restartGame(){
 async function checkModal(ativo){
     if (!$('#myModal').is(':visible')) {
         ativo=false;
-        restartGame(backup);
+        //restartGame(backup);
     }
     if(ativo===true){
         setInterval(checkModal(ativo),100);
