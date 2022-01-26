@@ -44,14 +44,18 @@ function simula(){
     for (i = 0; i < 9; i++) {
         simulador = JSON.parse(JSON.stringify(objG.tabuleiro));
         if (simulador.tabuleiro[i] == -1) {
+            simulador.tabuleiro[i]=!simulador.player;
 
+            if(simulador.verifica()!==0 && simulador.verifica()!=-1){
+
+            }
         }
     }
 }
 
 function regPlay(pos){
     if(objG.player==false && objG.nivel!=0){
-
+        simula();
     }
     if(objG.tabuleiro[pos-1]==-1){
         objG.tabuleiro[pos-1]=parseInt(0+objG.player);
