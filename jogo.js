@@ -1,5 +1,6 @@
-var objG;
-var backup;
+let objG;
+let backup;
+
 function fazTudo(){
     do{
         posicao=parseInt(Math.random()*9);
@@ -11,26 +12,27 @@ function fazTudo(){
     if(objG.verifica()===true){
         clearInterval(intGame);
     }
+
 }
 
-function inicia(obj,computador=0){
+function inicia(obj,computador){
     objG=obj;
-    backup=JSON.parse(JSON.stringify(obj));
-    if(computador!=0){
+    backup=JSON.parse(JSON.stringify(objG.tabuleiro));
+    if(computador===true){
        objG.nivel=1;
     }
 }
 
 function restartGame(){
-    objG.tabuleiro=JSON.parse(JSON.stringify(backup.tabuleiro));
-    //objG.player=!objG.player;
+    objG.tabuleiro=backup;
+    objG.player=!objG.player;
     objG.desenha();
 }
 
 async function checkModal(ativo){
     if (!$('#myModal').is(':visible')) {
         ativo=false;
-        //restartGame(backup);
+        restartGame(backup);
     }
     if(ativo===true){
         setInterval(checkModal(ativo),100);
@@ -39,24 +41,21 @@ async function checkModal(ativo){
 }
 
 function simula(){
-    let aux;
     let simulador;
+    simulador.verifica =objG.verifica;
     for (i = 0; i < 9; i++) {
-        simulador = JSON.parse(JSON.stringify(objG.tabuleiro));
+        simulador.tabuleiro = JSON.parse(JSON.stringify(objG.tabuleiro));
         if (simulador.tabuleiro[i] == -1) {
             simulador.tabuleiro[i]=!simulador.player;
 
             if(simulador.verifica()!==0 && simulador.verifica()!=-1){
-
+                simulador.tabuleiro[i]=simulador.player;
             }
         }
     }
 }
 
 function regPlay(pos){
-    if(objG.player==false && objG.nivel!=0){
-        simula();
-    }
     if(objG.tabuleiro[pos-1]==-1){
         objG.tabuleiro[pos-1]=parseInt(0+objG.player);
         objG.desenha();
@@ -86,11 +85,12 @@ function regPlay(pos){
         $('#corpo2').html("<span> Casa Indisponivel </span>");
         $('#myModal2').modal('show');
     }
+    if(objG.player==false && objG.nivel!=0){
+        simula();
+    }
 }
 
 function desativa(){
     $('#myModal').modal('hide');
     $('#myModal2').modal('hide');
 }
-
-
