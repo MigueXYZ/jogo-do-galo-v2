@@ -40,21 +40,6 @@ async function checkModal(ativo){
 
 }
 
-function simula(){
-    let simulador;
-    simulador.verifica =objG.verifica;
-    for (i = 0; i < 9; i++) {
-        simulador.tabuleiro = JSON.parse(JSON.stringify(objG.tabuleiro));
-        if (simulador.tabuleiro[i] == -1) {
-            simulador.tabuleiro[i]=!simulador.player;
-
-            if(simulador.verifica()!==0 && simulador.verifica()!=-1){
-                simulador.tabuleiro[i]=simulador.player;
-            }
-        }
-    }
-}
-
 function regPlay(pos){
     if(objG.tabuleiro[pos-1]==-1){
         objG.tabuleiro[pos-1]=parseInt(0+objG.player);
@@ -86,11 +71,83 @@ function regPlay(pos){
         $('#myModal2').modal('show');
     }
     if(objG.player==false && objG.nivel!=0){
-        simula();
+        aux=JSON.parse(JSON.stringify(objG.tabuleiro));
+        console.log(minimax(aux,parseInt(0+objG.player)));
     }
 }
 
 function desativa(){
     $('#myModal').modal('hide');
     $('#myModal2').modal('hide');
+}
+
+/*algoritmo*/
+function emptyIndexies(auxiliar)
+{
+    return auxiliar.filter(s => s != 'true' && s!='false');
+}
+
+function checkIfWinner(board , player)
+{	if(board[0]===player&&board[1]===player&&board[2]===player||
+    board[0]===player&&board[3]===player&&board[6]===player||
+    board[0]===player&&board[4]===player&&board[8]===player||
+    board[1]===player&&board[4]===player&&board[7]===player||
+    board[2]===player&&board[5]===player&&board[8]===player||
+    board[3]===player&&board[4]===player&&board[5]===player||
+    board[6]===player&&board[7]===player&&board[8]===player||
+    board[2]===player&&board[4]===player&&board[6]===player)
+    return true;
+    return false;
+}
+
+function minimax(newBoard, player) {
+
+    var availSpots = emptyIndexies(newBoard);
+
+    if (checkIfWinner(newBoard, 0)) {
+        return {score: -10};
+    } else if (checkIfWinner(newBoard, 1)) {
+        return {score: 10};
+    } else if (availSpots.length === 0) {
+        return {score: 0};
+    }
+    var moves = [];
+    for (var i = 0; i < availSpots.length; i++) {
+        var move = {};
+        move.index = newBoard[availSpots[i]];
+        newBoard[availSpots[i]] = player;
+
+        if (player == 1) {
+            var result = minimax(newBoard, 0);
+            move.score = result.score;
+        } else {
+            var result = minimax(newBoard, 1);
+            move.score = result.score;
+        }
+
+        newBoard[availSpots[i]] = move.index;
+
+        moves.push(move);
+    }
+
+    var bestMove;
+    if(player === Computer) {
+        var bestScore = -10000;
+        for(var i = 0; i < moves.length; i++) {
+            if (moves[i].score > bestScore) {
+                bestScore = moves[i].score;
+                bestMove = i;
+            }
+        }
+    } else {
+        var bestScore = 10000;
+        for(var i = 0; i < moves.length; i++) {
+            if (moves[i].score < bestScore) {
+                bestScore = moves[i].score;
+                bestMove = i;
+            }
+        }
+    }
+
+    return moves[bestMove];
 }
