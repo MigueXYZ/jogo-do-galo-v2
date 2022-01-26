@@ -19,7 +19,7 @@ function inicia(obj,computador){
     objG=obj;
     console.log("chamaram-me");
     //backup=JSON.parse(JSON.stringify(objG.tabuleiro));
-    backup=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
+    //backup=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
     if(computador===true){
        objG.nivel=1;
     }
@@ -67,7 +67,14 @@ function regPlay(pos){
         objG.player=!objG.player;
         $('#playjogador').html('Jogador '+ parseInt(1+!objG.player));
 
-
+        if(objG.player===false && objG.nivel>0){
+            //simula();
+            player=objG.player;
+            board=JSON.parse(JSON.stringify(objG.tabuleiro));
+            console.log("Player: "+player);
+            console.log("Board: "+board);
+            console.log(minimax(board,player));
+        }
 
     }
     else{
@@ -105,7 +112,7 @@ function checkIfWinner(board , player)
 function minimax(newBoard, player) {
 
     var availSpots = emptyIndexies(newBoard);
-    console.log("no inicio");
+
     if (checkIfWinner(newBoard, false)) {
         return {score: -10};
     } else if (checkIfWinner(newBoard, true)) {
