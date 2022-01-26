@@ -14,8 +14,9 @@
         var game = {
             'tabuleiro':[-1,-1,-1,-1,-1,-1,-1,-1,-1],
             'player':true,
+            'nivel':0,
             'desenha': function() {
-                for(i=0;i<9;i++)
+                for(i=0;i<9;i++){
                     if(this.tabuleiro[i]==1){
                         document.getElementById(i+1).src="imagens/x or o/x.png"
                     }else if(this.tabuleiro[i]==0){
@@ -23,6 +24,7 @@
                     }else{
                         document.getElementById(i+1).src="imagens/xo/ovo.png"
                     }
+                }
             },
             'verifica': function(){
                 if(this.tabuleiro[0]!=-1 && this.tabuleiro[0]==this.tabuleiro[1] && this.tabuleiro[0]==this.tabuleiro[2]){
@@ -98,14 +100,11 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="titulo">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h5 class="modal-title" id="titulo">Escolha</h5>
             </div>
             <div class="modal-body" id="corpo">
-            <img onclick="desativa()" src="imagens/imagens%20jogadores/1v1.png">
-            <img onclick="desativa()" src="imagens/imagens%20jogadores/player%201%20vs%20pc.png">
+            <img onclick="desativa();" src="imagens/imagens%20jogadores/1v1.png">
+            <img onclick="desativa();inicia()" src="imagens/imagens%20jogadores/player%201%20vs%20pc.png">
             </div>
             <div class="modal-footer" id="rodape">
                 <button type="button" class="btn btn-secondary" onclick="desativa()" data-dismiss="modal">Close</button>
