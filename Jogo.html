@@ -14,8 +14,9 @@
         var game = {
             'tabuleiro':[-1,-1,-1,-1,-1,-1,-1,-1,-1],
             'player':true,
-            'first':false,
+            'first':true,
             'nivel':0,
+            'isPc':false,
             'desenha': function() {
                 for(i=0;i<9;i++){
                     if(this.tabuleiro[i]==1){
@@ -69,13 +70,14 @@
         $('document').ready(
             function(){
                 $('#myModal').modal('show');
-                inicia(game,true);
+
                 $('#multiplayer').on("click", function(){
-                    objG.nivel=1;
+                     inicia(game,true);
                 });
                 $('#singleplayer').on("click", function(){
-                    objG.nivel=0;
+                    inicia(game,false);
                 });
+
             }
         );
 
@@ -114,7 +116,7 @@
             <img onclick="desativa();" id="multiplayer" src="imagens/imagens%20jogadores/player%201%20vs%20pc.png">
             </div>
             <div class="modal-footer" id="rodape">
-                <button type="button" class="btn btn-secondary" onclick="desativa();" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" onclick="desativa();    restartGame();" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -130,7 +132,7 @@
                 <img onclick="desativa();"  src="imagens/imagens%20jogadores/player%201%20vs%20pc.png">
             </div>
             <div class="modal-footer" id="rodape2">
-                <button type="button" class="btn btn-secondary" onclick="desativa();" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" onclick="desativa();    restartGame();" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

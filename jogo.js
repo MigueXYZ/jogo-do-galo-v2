@@ -17,7 +17,7 @@ function fazTudo(){
 
 function inicia(obj,computador){
     objG=obj;
-    console.log("chamaram-me");
+    console.log("chamaram-me" + computador);
     //backup=JSON.parse(JSON.stringify(objG.tabuleiro));
     //backup=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
     if(computador===true){
@@ -26,8 +26,13 @@ function inicia(obj,computador){
 }
 
 function restartGame(){
+
     objG.tabuleiro=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
+    objG.first=!objG.first;
+    objG.player=objG.first;
+    objG.isPc=!objG.player;    // Pc é sempre falso, ou seja, é sempre o 2º jogador
     objG.desenha();
+
 }
 
 async function checkModal(ativo){
@@ -40,6 +45,36 @@ async function checkModal(ativo){
         setInterval(checkModal(ativo),100);
     }
 
+}
+
+function pcPlay(){
+    let pos;
+    for(i=0;i<=8;i++){
+        console.log('FOR:'+i);
+        if(objG.tabuleiro[i]==-1){
+
+            objG.tabuleiro[i]=0;// ver se ganha
+            console.log('IF:'+objG.tabuleiro);
+            if(objG.verifica()){
+                console.log(i);
+                objG.tabuleiro[i]=-1;
+                return(i);
+            }else{
+                objG.tabuleiro[i]=1;// ver se perde
+                if(objG.verifica()){
+                    objG.tabuleiro[i]=-1;
+                    return(i);
+                }else{
+                    objG.tabuleiro[i]=-1;
+                }
+            }
+        }
+    }
+    do{
+        pos=parseInt(Math.random()*10);
+
+    }while(objG.tabuleiro[pos-1]!=-1);
+    return(pos);
 }
 
 function regPlay(pos){
@@ -68,32 +103,37 @@ function regPlay(pos){
         }
         console.log(objG.player);
         objG.player=!objG.player;
+        objG.isPc=!objG.player;
         $('#playjogador').html('Jogador '+ parseInt(1+!objG.player));
 
         if(objG.player===false && objG.nivel>0){
-            //simula();
+            /*simula();
             player=objG.player;
             board=JSON.parse(JSON.stringify(objG.tabuleiro));
             console.log("Player: "+player);
             console.log("Board: "+board);
-            console.log(minimax(board,player));
+            console.log(minimax(board,player));*/
         }
-
+        objG.isPc
     }
     else{
         $('#titulo2').html("Erro!")
         $('#corpo2').html("<span> Casa Indisponivel </span>");
         $('#myModal2').modal('show');
     }
+    if(objG.isPc && objG.nivel>0 && !objG.verifica()){
 
+        setTimeout(function (){
+            pos=pcPlay();// joga sempre aqui
+            console.log('POS:'+pos);
+            regPlay(pos);
+            },1000);
+    }
 }
 
 function desativa(){
     $('#myModal').modal('hide');
     $('#myModal2').modal('hide');
-    restartGame();
-    objG.first=!objG.first;
-    objG.player=objG.first;
 }
 
 /*algoritmo*/
