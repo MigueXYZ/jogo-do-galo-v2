@@ -136,6 +136,7 @@ function minimax(newBoard, player) {
         } else {
             var result = minimax(newBoard, true);
             move.score = result.score;
+
         }
 
         newBoard[availSpots[i]] = move.index;
