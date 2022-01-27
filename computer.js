@@ -80,10 +80,10 @@ function removeEventActioFrom_xORoFunction(){
 }
 
 //---------------------------------- miniMax algorithm --------------------------------------------
-function emptyIndexies(B)
+/*function emptyIndexies(B)
 {
-    return B.filter(s => s != "O" && s!='X');
-}
+   return B.filter(s => s != "O" && s!='X');
+}*/
 
 function checkIfWinner(board , player)
 {	if(board[0]===player&&board[1]===player&&board[2]===player||

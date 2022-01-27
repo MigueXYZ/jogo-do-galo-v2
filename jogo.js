@@ -31,9 +31,10 @@ function restartGame(){
 }
 
 async function checkModal(ativo){
+    console.log('checkModal');
     if (!$('#myModal').is(':visible')) {
         ativo=false;
-        restartGame();
+        //restartGame();
     }
     if(ativo===true){
         setInterval(checkModal(ativo),100);
@@ -63,7 +64,9 @@ function regPlay(pos){
             $('#corpo').html('Parabéns jogador '+(!aux+1));
             $('#myModal').modal('show');
 
-                    }
+
+        }
+        console.log(objG.player);
         objG.player=!objG.player;
         $('#playjogador').html('Jogador '+ parseInt(1+!objG.player));
 
@@ -88,12 +91,15 @@ function regPlay(pos){
 function desativa(){
     $('#myModal').modal('hide');
     $('#myModal2').modal('hide');
+    restartGame();
+    objG.first=!objG.first;
+    objG.player=objG.first;
 }
 
 /*algoritmo*/
 function emptyIndexies(auxiliar)
 {
-    return auxiliar.filter(s => s != 'true' && s!='false');
+    return auxiliar.filter(s => s !== true && s!== false);
 }
 
 function checkIfWinner(board , player)
@@ -108,10 +114,14 @@ function checkIfWinner(board , player)
     return true;
     return false;
 }
-
+var ado = 0;
 function minimax(newBoard, player) {
+    let result;
+    ado++;
+    console.log("minimax" + ado);
 
     var availSpots = emptyIndexies(newBoard);
+    console.log("AVAILABLE SPOTS:" + availSpots);
 
     if (checkIfWinner(newBoard, false)) {
         return {score: -10};
@@ -124,23 +134,35 @@ function minimax(newBoard, player) {
     var moves = [];
 
     for (var i = 0; i < availSpots.length; i++) {
+        console.log("AvailSpots Length:"+availSpots.length);
 
 
         var move = {};
         move.index = newBoard[availSpots[i]];
         newBoard[availSpots[i]] = player;
-
-        if (player == true) {
-            var result = minimax(newBoard, false);
-            move.score = result.score;
-        } else {
-            var result = minimax(newBoard, true);
-            move.score = result.score;
+        console.log("NEWBOARDDDDD: "+  newBoard[availSpots[i]]);
+        if(ado < 1000){
+            if (player == true) {
+                console.log("RESULT" + result);
+                result = minimax(newBoard, false);
+                move.score = result.score;
+            } else {
+                console.log("RESULT" + result);
+                result = minimax(newBoard, true);
+                move.score = result.score;
+            }
         }
 
-        newBoard[availSpots[i]] = move.index;
 
+
+
+
+        newBoard[availSpots[i]] = move.index;
+        console.log("NEWBOARD: "+  newBoard[availSpots[i]]);
+        console.log("NewBoard Availspot: "+  availSpots[i]);
+        console.log("MOVE INDEX: "+ move.index);
         moves.push(move);
+        console.log("MOVE: "+ move);
     }
 
     var bestMove;
@@ -162,7 +184,7 @@ function minimax(newBoard, player) {
         }
     }
 
-    console.log(moves[bestMove]);
+    console.log("aaaaaa"+moves[bestMove]);
     return moves[bestMove];
 
 }

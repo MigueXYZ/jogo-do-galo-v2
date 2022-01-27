@@ -14,6 +14,7 @@
         var game = {
             'tabuleiro':[-1,-1,-1,-1,-1,-1,-1,-1,-1],
             'player':true,
+            'first':false,
             'nivel':0,
             'desenha': function() {
                 for(i=0;i<9;i++){
@@ -68,7 +69,7 @@
         $('document').ready(
             function(){
                 $('#myModal').modal('show');
-                inicia(game,false);
+                inicia(game,true);
                 $('#multiplayer').on("click", function(){
                     objG.nivel=1;
                 });
