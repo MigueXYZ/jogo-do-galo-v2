@@ -60,6 +60,7 @@ function pcPlay(){
                 objG.tabuleiro[i]=-1;
                 return(i);
             }else{
+
                 objG.tabuleiro[i]=1;// ver se perde
                 if(objG.verifica()){
                     objG.tabuleiro[i]=-1;
@@ -122,7 +123,7 @@ function regPlay(pos){
         $('#myModal2').modal('show');
     }
     if(objG.isPc && objG.nivel>0 && !objG.verifica()){
-
+        console.log(objG.isPc + "..." + objG.nivel + "..." + !objG.verifica())
         setTimeout(function (){
             pos=pcPlay();// joga sempre aqui
             console.log('POS:'+pos);
