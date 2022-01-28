@@ -1,5 +1,6 @@
 let objG;
 let backup;
+var id;
 
 function fazTudo(){
     do{
@@ -27,22 +28,28 @@ function inicia(obj,computador){
 
 function restartGame(){
 
+
     objG.tabuleiro=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
     objG.first=!objG.first;
     objG.player=objG.first;
     objG.isPc=!objG.player;    // Pc é sempre falso, ou seja, é sempre o 2º jogador
     objG.desenha();
 
+    if(objG.isPc){
+        regPlay();
+    }
 }
 
 async function checkModal(ativo){
+
     console.log('checkModal');
     if (!$('#myModal').is(':visible')) {
         ativo=false;
+        clearInterval(id);
         //restartGame();
     }
     if(ativo===true){
-        setInterval(checkModal(ativo),100);
+        id=setInterval(checkModal(ativo),100);
     }
 
 }
@@ -52,26 +59,35 @@ function pcPlay(){
     for(i=0;i<=8;i++){
         console.log('FOR:'+i);
         if(objG.tabuleiro[i]==-1){
-
             objG.tabuleiro[i]=0;// ver se ganha
             console.log('IF:'+objG.tabuleiro);
-            if(objG.verifica()){
+            if(objG.verifica()!==0){
                 console.log(i);
                 objG.tabuleiro[i]=-1;
-                return(i);
-            }else{
-
-                objG.tabuleiro[i]=1;// ver se perde
-                if(objG.verifica()){
-                    objG.tabuleiro[i]=-1;
-                    return(i);
-                }else{
-                    objG.tabuleiro[i]=-1;
-                }
+                return(i+1);
+            }
+            else{
+                objG.tabuleiro[i]=-1;
             }
         }
     }
+    for(i=0;i<=8;i++){
+        console.log('FOR:'+i);
+        if(objG.tabuleiro[i]==-1){
+
+            objG.tabuleiro[i]=1;// ver se perde
+            console.log('IF:'+objG.tabuleiro);
+            if(objG.verifica()!==0){
+                objG.tabuleiro[i]=-1;
+                return(i+1);
+            }else{
+                objG.tabuleiro[i]=-1;
+            }
+        }
+    }
+
     do{
+        console.log("AHHHHHHHHHHHHHHHH");
         pos=parseInt(Math.random()*10);
 
     }while(objG.tabuleiro[pos-1]!=-1);
@@ -79,49 +95,52 @@ function pcPlay(){
 }
 
 function regPlay(pos){
-    if(objG.tabuleiro[pos-1]==-1){
-        objG.tabuleiro[pos-1]=parseInt(0+objG.player);
-        objG.desenha();
-        aux=objG.verifica();
-        console.log("aux: "+aux);
-        console.log("tabuleiro: "+objG.tabuleiro);
-        console.log("player: "+parseInt(1+objG.player));
-        if(aux==-1){
-            checkModal(true);
+    if(pos===undefined){
+        ;
+    }else {
+        if (objG.tabuleiro[pos - 1] == -1) {
+            objG.tabuleiro[pos - 1] = parseInt(0 + objG.player);
+            objG.desenha();
+            aux = objG.verifica();
+            console.log("aux: " + aux);
+            console.log("tabuleiro: " + objG.tabuleiro);
+            console.log("player: " + parseInt(1 + objG.player));
+            if (aux == -1) {
+                checkModal(true);
 
-            $('#titulo').html('Empate');
-            $('#corpo').html('O jogo acabou em Empate')
-            $('#myModal').modal('show');
+                $('#titulo').html('Empate');
+                $('#corpo').html('O jogo acabou em Empate')
+                $('#myModal').modal('show');
+            } else if (aux !== 0) {
+                checkModal(true);
+
+                $('#titulo').html('Vitória');
+                $('#corpo').html('Parabéns jogador ' + (!aux + 1));
+                $('#myModal').modal('show');
+
+
+            }
+            console.log(objG.player);
+            objG.player = !objG.player;
+            objG.isPc = !objG.player;
+            $('#playjogador').html('Jogador ' + parseInt(1 + !objG.player));
+
+            if (objG.player === false && objG.nivel > 0) {
+                /*simula();
+                player=objG.player;
+                board=JSON.parse(JSON.stringify(objG.tabuleiro));
+                console.log("Player: "+player);
+                console.log("Board: "+board);
+                console.log(minimax(board,player));*/
+            }
+            objG.isPc
+        } else {
+            $('#titulo2').html("Erro!")
+            $('#corpo2').html("<span> Casa Indisponivel </span>");
+            $('#myModal2').modal('show');
         }
-        else if(aux!==0){
-            checkModal(true);
-
-            $('#titulo').html('Vitória');
-            $('#corpo').html('Parabéns jogador '+(!aux+1));
-            $('#myModal').modal('show');
-
-
-        }
-        console.log(objG.player);
-        objG.player=!objG.player;
-        objG.isPc=!objG.player;
-        $('#playjogador').html('Jogador '+ parseInt(1+!objG.player));
-
-        if(objG.player===false && objG.nivel>0){
-            /*simula();
-            player=objG.player;
-            board=JSON.parse(JSON.stringify(objG.tabuleiro));
-            console.log("Player: "+player);
-            console.log("Board: "+board);
-            console.log(minimax(board,player));*/
-        }
-        objG.isPc
     }
-    else{
-        $('#titulo2').html("Erro!")
-        $('#corpo2').html("<span> Casa Indisponivel </span>");
-        $('#myModal2').modal('show');
-    }
+    // ==============================================================================   força uma jogada do PC
     if(objG.isPc && objG.nivel>0 && !objG.verifica()){
         console.log(objG.isPc + "..." + objG.nivel + "..." + !objG.verifica())
         setTimeout(function (){
@@ -130,6 +149,7 @@ function regPlay(pos){
             regPlay(pos);
             },1000);
     }
+    //========================================================================================================
 }
 
 function desativa(){
