@@ -1,7 +1,24 @@
 body{
-    background-color: #63c078 !important;
+    background-color: blue !important;
     color:darkslateblue;
 
+}
+
+
+div#container{
+    background-color: #63c078 !important;
+    border-radius: 15px;
+    padding:15px;
+    margin-top:15px;
+}
+div#playjogador{
+    margin:15px;
+    width:610px;
+    font-size:20px;
+    font-family: Calibri;
+    color:white;
+    border-radius: 15px;
+    background-color: #63c078;
 }
 h1{
     text-align: center;
@@ -38,9 +55,10 @@ table {
 img#logo{
     margin-left: 25px;
     margin-top: 5px;
-    width:609px;
-    height:139px;
+    width:610px;
+    height:140px;
     z-index: -1;
+    border-radius: 15px;
 }
 img{
     margin-left: 25px;
