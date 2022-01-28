@@ -8,7 +8,7 @@ div.container{
 }
 
 div#container{
-    background-color: #63c078 !important;
+    background-color: darkgoldenrod   !important;
     border-radius: 15px;
     padding:15px;
     margin-top:15px;
@@ -19,7 +19,11 @@ div[class*="col-2"]{
     font-family: Calibri;
     color:white;
     border-radius: 15px;
-    background-color: #63c078;
+    background-color: darkgoldenrod  ;
+    text-align:center;
+}
+div[class*=active]{
+    background-color: darkviolet;
 }
 h1{
     text-align: center;
