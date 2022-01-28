@@ -24,6 +24,7 @@ function inicia(obj,computador){
     if(computador===true){
        objG.nivel=1;
     }
+    objG.desenha();
 }
 
 function restartGame(){
@@ -105,6 +106,7 @@ function regPlay(pos){
             console.log("aux: " + aux);
             console.log("tabuleiro: " + objG.tabuleiro);
             console.log("player: " + parseInt(1 + objG.player));
+
             if (aux == -1) {
                 checkModal(true);
 

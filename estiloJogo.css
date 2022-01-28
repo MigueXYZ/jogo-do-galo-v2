@@ -23,7 +23,7 @@ div[class*="col-2"]{
     text-align:center;
 }
 div[class*=active]{
-    background-color: darkviolet;
+    background-color: darkviolet !important;
 }
 h1{
     text-align: center;
