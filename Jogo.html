@@ -27,14 +27,17 @@
                         document.getElementById(i+1).src="imagens/xo/ovo.png"
                     }
                 }
-                if(this.player==true){
+                if (this.player == false) {
+                    console.log("player:" + objG.player);
                     $('div.player2').addClass("active");
                     $('div.player1').removeClass("active");
-                }else{
-
+                } else {
+                    console.log("player:" + objG.player);
                     $('div.player2').removeClass("active");
                     $('div.player1').addClass("active");
                 }
+                $('#playjogador').html('Jogador ' + parseInt(1 + !objG.player));
+
 
             },
             'verifica': function(){
@@ -86,7 +89,6 @@
                 $('#singleplayer').on("click", function(){
                     inicia(game,false);
                 });
-
             }
         );
 
