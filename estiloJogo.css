@@ -1,14 +1,25 @@
-body{
+/*body{
     background-color: blue !important;
     color:darkslateblue;
-
+    }
+*/
+body,html{
+    height: 100%;
+    margin: 0;
 }
+.bg{
+    background-image: url("imagens/img background/img1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
 div.container{
     padding:5px;
 }
 
 div#container{
-    background-color: darkgoldenrod   !important;
+  /*  background-color:    !important;*/
     border-radius: 15px;
     padding:15px;
     margin-top:15px;
@@ -78,7 +89,7 @@ img{
 #container {
     display: flex;
     width: 800px;
-
+    height: 100px;
     flex-direction: row;
     flex-wrap: wrap;
     position: relative;
