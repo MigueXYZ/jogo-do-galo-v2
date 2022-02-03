@@ -28,8 +28,6 @@ function inicia(obj,computador){
 }
 
 function restartGame(){
-
-
     objG.tabuleiro=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
     objG.first=!objG.first;
     objG.player=objG.first;
@@ -75,7 +73,6 @@ function pcPlay(){
     for(i=0;i<=8;i++){
         console.log('FOR:'+i);
         if(objG.tabuleiro[i]==-1){
-
             objG.tabuleiro[i]=1;// ver se perde
             console.log('IF:'+objG.tabuleiro);
             if(objG.verifica()!==0){
@@ -150,6 +147,14 @@ function regPlay(pos){
             console.log('POS:'+pos);
             regPlay(pos);
             },1000);
+        if(objG.verifica()==false){
+            if(objG.nivel!=1){
+                nivel-=1;
+            }
+        }
+        else if(objG.verifica()===true){
+            nivel+=1;
+        }
     }
     //========================================================================================================
 }
