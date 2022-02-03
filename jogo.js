@@ -7,7 +7,7 @@ function fazTudo(){
         posicao=parseInt(Math.random()*9);
     }while(objG.tabuleiro[posicao]!=-1);
     objG.tabuleiro[posicao]=parseInt(0+objG.player);
-    objG.player=!objG.player;0
+    objG.player=!objG.player;
     objG.desenha();
     document.write('<br>');
     if(objG.verifica()===true){
@@ -44,12 +44,9 @@ async function checkModal(ativo){
     console.log('checkModal');
     if (!$('#myModal').is(':visible')) {
         ativo=false;
-        clearInterval(id);
         //restartGame();
     }
-    if(ativo===true){
-        id=setInterval(checkModal(ativo),100);
-    }
+
 
 }
 
@@ -84,81 +81,131 @@ function pcPlay(){
         }
     }
 
-    do{
-        console.log("AHHHHHHHHHHHHHHHH");
-        pos=parseInt(Math.random()*10);
+    if(objG.nivel == 2){
+        do{
+            pos = -1;
+            pos=parseInt(Math.random()*10);
+        }while(pos==1 || pos==3 || pos==5 || pos==7);
+        return(pos);
+    }else{
+        do{
+            console.log("AHHHHHHHHHHHHHHHH");
+            pos=parseInt(Math.random()*10);
 
-    }while(objG.tabuleiro[pos-1]!=-1);
-    return(pos);
+        }while(objG.tabuleiro[pos-1]!=-1);
+        return(pos);
+    }
+
 }
 
 function regPlay(pos){
     if(pos===undefined){
         ;
-    }else {
-        if (objG.tabuleiro[pos - 1] == -1) {
-            objG.tabuleiro[pos - 1] = parseInt(0 + objG.player);
-            objG.desenha();
-            aux = objG.verifica();
-            console.log("aux: " + aux);
-            console.log("tabuleiro: " + objG.tabuleiro);
-            console.log("player: " + parseInt(1 + objG.player));
+    }else if (objG.tabuleiro[pos - 1] == -1) {
+        objG.tabuleiro[pos - 1] = parseInt(0 + objG.player);
+        objG.desenha();
+        aux = objG.verifica();
+        console.log("aux: " + aux);
+        console.log("tabuleiro: " + objG.tabuleiro);
+        console.log("player: " + parseInt(1 + objG.player));
 
-            if (aux == -1) {
-                checkModal(true);
+        if (aux == -1) {
+            checkModal(true);
 
-                $('#titulo').html('Empate');
-                $('#corpo').html('O jogo acabou em Empate')
-                $('#myModal').modal('show');
-            } else if (aux !== 0) {
-                checkModal(true);
+            $('#titulo').html('Empate');
+            $('#corpo').html('O jogo acabou em Empate')
+            $('#myModal').modal('show');
+        } else if (aux !== 0) {
+            checkModal(true);
 
-                $('#titulo').html('Vitória');
-                $('#corpo').html('Parabéns jogador ' + (!aux + 1));
-                $('#myModal').modal('show');
+            $('#titulo').html('Vitória');
+            $('#corpo').html('Parabéns jogador ' + (!aux + 1));
+            $('#myModal').modal('show');
 
 
-            }
-            console.log(objG.player);
-            objG.player = !objG.player;
-            objG.isPc = !objG.player;
-            $('#playjogador').html('Jogador ' + parseInt(1 + !objG.player));
-
-            if (objG.player === false && objG.nivel > 0) {
-                /*simula();
-                player=objG.player;
-                board=JSON.parse(JSON.stringify(objG.tabuleiro));
-                console.log("Player: "+player);
-                console.log("Board: "+board);
-                console.log(minimax(board,player));*/
-            }
-            objG.isPc
-        } else {
-            $('#titulo2').html("Erro!")
-            $('#corpo2').html("<span> Casa Indisponivel </span>");
-            $('#myModal2').modal('show');
         }
+        console.log(objG.player);
+        objG.player = !objG.player;
+        objG.isPc = !objG.player;
+
+
+        if (objG.player === false && objG.nivel > 0) {
+            /*simula();
+            player=objG.player;
+            board=JSON.parse(JSON.stringify(objG.tabuleiro));
+            console.log("Player: "+player);
+            console.log("Board: "+board);
+            console.log(minimax(board,player));*/
+        }
+        objG.isPc
+    } else {
+        $('#titulo2').html("Erro!")
+        $('#corpo2').html("<span> Casa Indisponivel </span>");
+        $('#myModal2').modal('show');
     }
     // ==============================================================================   força uma jogada do PC
+    console.log("VERIFICA:" + objG.verifica())
+    if(objG.verifica()){
+        let a = getTab();
+
+        if(a === 0 && objG.nivel!==1){
+            objG.nivel-=1;
+        }
+        else {
+            objG.nivel+=1;
+        }
+
+    }
+    console.log("NIVEL:" + objG.nivel);
+
+
     if(objG.isPc && objG.nivel>0 && !objG.verifica()){
         console.log(objG.isPc + "..." + objG.nivel + "..." + !objG.verifica())
         setTimeout(function (){
             pos=pcPlay();// joga sempre aqui
             console.log('POS:'+pos);
             regPlay(pos);
-            },1000);
-        if(objG.verifica()==false){
-            if(objG.nivel!=1){
-                nivel-=1;
-            }
-        }
-        else if(objG.verifica()===true){
-            nivel+=1;
-        }
+            },500);
     }
     //========================================================================================================
 }
-
+function getTab(){
+    if(objG.tabuleiro[0]!=-1 && objG.tabuleiro[0]==objG.tabuleiro[1] && objG.tabuleiro[0]==objG.tabuleiro[2]){
+        return(objG.tabuleiro[0]);
+    }
+    if(objG.tabuleiro[3]!=-1 && objG.tabuleiro[3]==objG.tabuleiro[4] && objG.tabuleiro[3]==objG.tabuleiro[5])
+    {
+        return(objG.tabuleiro[3]);
+    }
+    if(objG.tabuleiro[6]!=-1 && objG.tabuleiro[7]==objG.tabuleiro[6] && objG.tabuleiro[6]==objG.tabuleiro[8])
+    {
+        return(objG.tabuleiro[6]);
+    }
+    if(objG.tabuleiro[0]!=-1 && objG.tabuleiro[3]==objG.tabuleiro[0] && objG.tabuleiro[3]==objG.tabuleiro[6])
+    {
+        return(objG.tabuleiro[0]);
+    }
+    if(objG.tabuleiro[1]!=-1 && objG.tabuleiro[1]==objG.tabuleiro[4] && objG.tabuleiro[1]==objG.tabuleiro[7])
+    {
+        return(objG.tabuleiro[1]);
+    }
+    if(objG.tabuleiro[2]!=-1 && objG.tabuleiro[2]==objG.tabuleiro[5] && objG.tabuleiro[2]==objG.tabuleiro[8])
+    {
+        return(objG.tabuleiro[2]);
+    }
+    if(objG.tabuleiro[0]!=-1 && objG.tabuleiro[0]==objG.tabuleiro[4] && objG.tabuleiro[0]==objG.tabuleiro[8])
+    {
+        return(objG.tabuleiro[0]);
+    }
+    if(objG.tabuleiro[6]!=-1 && objG.tabuleiro[6]==objG.tabuleiro[4] && objG.tabuleiro[6]==objG.tabuleiro[2])
+    {
+        return(objG.tabuleiro[6]);
+    }
+    if(!this.tabuleiro.includes(-1)){
+        return(-1);
+    }
+    return(0);
+}
 function desativa(){
     $('#myModal').modal('hide');
     $('#myModal2').modal('hide');
@@ -220,6 +267,10 @@ function minimax(newBoard, player) {
                 move.score = result.score;
             }
         }
+
+
+
+
 
         newBoard[availSpots[i]] = move.index;
         console.log("NEWBOARD: "+  newBoard[availSpots[i]]);
