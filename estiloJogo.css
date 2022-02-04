@@ -41,10 +41,21 @@ h1{
     text-align: center;
 
 }
+
+.playerOut{
+    margin-left: 40px !important;
+    align-items: center !important;
+}
 h5{
     text-align: center;
 }
+.textbox{
+    text-align: center;
+}
 
+.disable{
+    display: none !important;
+}
 /*-------------------------------------------------------
 \\ td {
     width: 200px;

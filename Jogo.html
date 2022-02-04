@@ -11,6 +11,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <script>
+
+
+
+
         var game = {
             'tabuleiro':[-1,-1,-1,-1,-1,-1,-1,-1,-1],
             'player':true,
@@ -30,11 +34,11 @@
                 if (this.player == false) {
                     console.log("player:" + objG.player);
                     $('div.player2').addClass("active");
-                    $('div.player1').removeClass("active");
+                    $('div.playerOut').removeClass("active");
                 } else {
                     console.log("player:" + objG.player);
                     $('div.player2').removeClass("active");
-                    $('div.player1').addClass("active");
+                    $('div.playerOut').addClass("active");
                 }
                 $('#playjogador').html('Jogador ' + parseInt(1 + !objG.player));
 
@@ -89,8 +93,30 @@
                 $('#singleplayer').on("click", function(){
                     inicia(game,false);
                 });
+
+
+                var input = document.getElementById("texto");
+                input.addEventListener("keyup", function(event) {
+                        if (event.keyCode === 13) {
+                            console.log("KEYYYYYYYYY")
+                            event.preventDefault();
+                            $('#tiJog').text($('#texto').val());
+                            $('#texto').hide();
+                        }
+                });
+
+                var input2 = document.getElementById("texto2");
+                input2.addEventListener("keyup", function(event) {
+                    if (event.keyCode === 13) {
+                        console.log("KEYYYYYYYYY")
+                        event.preventDefault();
+                        $('#tiJog2').text($('#texto2').val());
+                        $('#texto2').hide();
+                    }
+                });
             }
-        );
+
+            );
 
 
     </script>
@@ -101,12 +127,12 @@
 <br>
 <div class="col-12">
     <div class="row">
-        <div class="col-2 player1 ">
+        <div class="col-2 playerOut">
             <span class="player1 active">
-                Jogador 1
-                <form>
-                <input type="text" name="name">   </input>
-                </form>
+                <label id="tiJog"></label>
+                <input id="texto" name="name" class="textbox" type="text"/>
+
+
             </span>
 
         </div>
@@ -129,10 +155,8 @@
         </div>
         <div class="col-2 player2 ">
             <span class="player2">
-                Jogador 2
-                <form>
-                <input type="text" name="name">   </input>
-                </form>
+                <label id="tiJog2"></label>
+                <input id="texto2" name="name" class="textbox" type="text"/>
             </span>
 
         </div>
